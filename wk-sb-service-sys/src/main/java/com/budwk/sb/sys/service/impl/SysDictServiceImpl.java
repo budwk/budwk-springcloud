@@ -9,6 +9,8 @@ import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.lang.Strings;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@CacheConfig(cacheNames = "sys_dict")
 public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements SysDictService {
 
     @Resource(type = Dao.class)
@@ -44,7 +47,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param id
      * @return
      */
-    @Override
+    @Cacheable
     public String getNameById(String id) {
         Sys_dict dict = this.fetch(id);
         return dict == null ? "" : dict.getName();
@@ -56,7 +59,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param path
      * @return
      */
-    @Override
+    @Cacheable
     public List<Sys_dict> getSubListByPath(String path) {
         return this.query(Cnd.where("path", "like", Strings.sNull(path) + "____").asc("location"));
     }
@@ -67,7 +70,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param id
      * @return
      */
-    @Override
+    @Cacheable
     public List<Sys_dict> getSubListById(String id) {
         return this.query(Cnd.where("parentId", "=", Strings.sNull(id)).asc("location"));
     }
@@ -78,7 +81,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param code
      * @return
      */
-    @Override
+    @Cacheable
     public List<Sys_dict> getSubListByCode(String code) {
         Sys_dict dict = this.fetch(Cnd.where("code", "=", code));
         return dict == null ? new ArrayList<>() : this.query(Cnd.where("parentId", "=", Strings.sNull(dict.getId())).asc("location"));
@@ -90,7 +93,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param path
      * @return
      */
-    @Override
+    @Cacheable
     public Map getSubMapByPath(String path) {
         return this.getMap(Sqls.create("select code,name from sys_dict where path like @path order by location asc").setParam("path", path + "____"));
     }
@@ -101,7 +104,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param id
      * @return
      */
-    @Override
+    @Cacheable
     public Map getSubMapById(String id) {
         return this.getMap(Sqls.create("select code,name from sys_dict where parentId = @id order by location asc").setParam("id", id));
     }
@@ -112,7 +115,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param code
      * @return
      */
-    @Override
+    @Cacheable
     public Map getSubMapByCode(String code) {
         Sys_dict dict = this.fetch(Cnd.where("code", "=", code));
         return dict == null ? new HashMap() : this.getMap(Sqls.create("select code,name from sys_dict where parentId = @id order by location asc").setParam("id", dict.getId()));
@@ -124,7 +127,6 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      * @param dict
      * @param pid
      */
-    @Override
     public void save(Sys_dict dict, String pid) {
         String path = "";
         if (!Strings.isEmpty(pid)) {
@@ -144,7 +146,6 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
      *
      * @param dict
      */
-    @Override
     public void deleteAndChild(Sys_dict dict) {
         dao().execute(Sqls.create("delete from sys_dict where path like @path").setParam("path", dict.getPath() + "%"));
         if (!Strings.isEmpty(dict.getParentId())) {
@@ -155,7 +156,7 @@ public class SysDictServiceImpl extends BaseServiceImpl<Sys_dict> implements Sys
         }
     }
 
-    @Override
+    @CacheEvict
     public void clearCache() {
 
     }

@@ -1,0 +1,47 @@
+server:
+  port: 0
+spring:
+  application:
+    name: wk-service-sys
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/budwk_sb?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测,检测需要关闭的空闲连接,单位是毫秒
+      time-between-eviction-runs-millis:  60000
+      # 配置一个连接在池中最小生存的时间,单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        server-group: BUDWK
+logging:
+  file:
+    path: /data/logs/${spring.application.name}
+
+nutz:
+  dao:
+    runtime:
+      create: true #是否自动建表 默认true
+      migration: false #是否自动变更 默认true
+      add-column: true # 是否添加列 默认true
+      delete-column: false # 是否删除列 默认true
+      foce-create: false # 是否删表重建，注意此功能会删除全部表及数据，一般应用于demo或测试 默认false
+      check-index: true # 是否检查索引 默认true
+      basepackage: # 相关实体所在包
+        - com.budwk.sb
+  json:
+    enabled: true #是否启用，默认true
+    mode: compact #json模式，默认compact
+    ignore-null: true # 是否忽略空对象
+    compact: true # 是否启用压缩模式
+    date-format: yyyy-MM-dd Hh:mm:ss # 日期格式化

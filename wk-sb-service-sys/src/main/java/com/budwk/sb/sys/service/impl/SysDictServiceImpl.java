@@ -1,9 +1,9 @@
-package com.budwk.sys.service.impl;
+package com.budwk.sb.sys.service.impl;
 
 
 import com.budwk.sb.sys.models.Sys_dict;
+import com.budwk.sb.sys.service.SysDictService;
 import com.budwk.spring.boot.base.service.BaseServiceImpl;
-import com.budwk.sys.service.SysDictService;
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;

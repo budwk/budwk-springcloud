@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.budwk</groupId>
-            <artifactId>wk-module</artifactId>
+            <artifactId>wk-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

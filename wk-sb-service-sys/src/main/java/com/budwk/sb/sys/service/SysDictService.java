@@ -1,4 +1,4 @@
-package com.budwk.sys.service;
+package com.budwk.sb.sys.service;
 
 
 import com.budwk.sb.sys.models.Sys_dict;

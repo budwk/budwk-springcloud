@@ -1,4 +1,4 @@
-package com.budwk.sys;
+package com.budwk.sb.sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

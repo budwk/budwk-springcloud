@@ -2,7 +2,7 @@ server:
   port: 0
 spring:
   application:
-    name: wk-service-sys
+    name: wk-sb-service-sys
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver

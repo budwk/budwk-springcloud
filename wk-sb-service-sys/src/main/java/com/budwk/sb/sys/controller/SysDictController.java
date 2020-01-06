@@ -1,7 +1,7 @@
-package com.budwk.sys.controller;
+package com.budwk.sb.sys.controller;
 
 import com.budwk.sb.commons.base.Result;
-import com.budwk.sys.service.SysDictService;
+import com.budwk.sb.sys.service.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

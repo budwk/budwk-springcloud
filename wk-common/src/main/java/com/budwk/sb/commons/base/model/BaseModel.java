@@ -6,15 +6,11 @@ import org.nutz.dao.interceptor.annotation.PrevInsert;
 import org.nutz.dao.interceptor.annotation.PrevUpdate;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
-import org.nutz.lang.Strings;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 /**
- * @author wizzer(wizzer@qq.com) on 2016/6/21.
+ * @author wizzer(wizzer.cn) on 2016/6/21.
  */
 @Data
 public abstract class BaseModel implements Serializable {
@@ -64,41 +60,5 @@ public abstract class BaseModel implements Serializable {
 
     public Boolean flag() {
         return false;
-    }
-
-    public String createdByUid() {
-        String uid = getCreatedBy();
-        if (Strings.isNotBlank(uid)) {
-            return uid;
-        }
-        try {
-            HttpSession httpSession = getSession();
-            if (httpSession != null) {
-                return Strings.sNull(httpSession.getAttribute("platform_uid"));
-            }
-        } catch (Exception e) {
-        }
-        return "";
-    }
-
-    public String updatedByUid() {
-        String uid = getUpdatedBy();
-        if (Strings.isNotBlank(uid)) {
-            return uid;
-        }
-        try {
-            HttpSession httpSession = getSession();
-            if (httpSession != null) {
-                return Strings.sNull(httpSession.getAttribute("platform_uid"));
-            }
-        } catch (Exception e) {
-        }
-        return "";
-    }
-
-    private HttpSession getSession() throws Exception {
-        ServletRequestAttributes servletRequestAttributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return servletRequestAttributes.getRequest().getSession(true);
     }
 }

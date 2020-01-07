@@ -38,7 +38,7 @@
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
         <spring-cloud-nacos-discovery.version>0.9.0.RELEASE</spring-cloud-nacos-discovery.version>
-        <alibaba-cloud-nacos.version>2.1.1.RELEASE</alibaba-cloud-nacos.version>
+        <alibaba-cloud.version>2.1.1.RELEASE</alibaba-cloud.version>
         <druid.version>1.1.21</druid.version>
         <jedis.version>3.2.0</jedis.version>
         <mysql-connector-java.version>5.1.48</mysql-connector-java.version>

@@ -23,7 +23,6 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        server-group: BUDWK
 redis:
   host: 127.0.0.1
   port: 6379

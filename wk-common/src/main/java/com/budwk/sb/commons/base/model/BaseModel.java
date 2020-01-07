@@ -1,16 +1,22 @@
 package com.budwk.sb.commons.base.model;
 
+import lombok.Data;
 import org.nutz.dao.entity.annotation.*;
 import org.nutz.dao.interceptor.annotation.PrevInsert;
 import org.nutz.dao.interceptor.annotation.PrevUpdate;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
+import org.nutz.lang.Strings;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
 /**
  * @author wizzer(wizzer@qq.com) on 2016/6/21.
  */
+@Data
 public abstract class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -61,50 +67,38 @@ public abstract class BaseModel implements Serializable {
     }
 
     public String createdByUid() {
-        return getCreatedBy();
+        String uid = getCreatedBy();
+        if (Strings.isNotBlank(uid)) {
+            return uid;
+        }
+        try {
+            HttpSession httpSession = getSession();
+            if (httpSession != null) {
+                return Strings.sNull(httpSession.getAttribute("platform_uid"));
+            }
+        } catch (Exception e) {
+        }
+        return "";
     }
 
     public String updatedByUid() {
-        return getUpdatedBy();
+        String uid = getUpdatedBy();
+        if (Strings.isNotBlank(uid)) {
+            return uid;
+        }
+        try {
+            HttpSession httpSession = getSession();
+            if (httpSession != null) {
+                return Strings.sNull(httpSession.getAttribute("platform_uid"));
+            }
+        } catch (Exception e) {
+        }
+        return "";
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Long getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Long getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Long updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Boolean getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Boolean delFlag) {
-        this.delFlag = delFlag;
+    private HttpSession getSession() throws Exception {
+        ServletRequestAttributes servletRequestAttributes =
+                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return servletRequestAttributes.getRequest().getSession(true);
     }
 }

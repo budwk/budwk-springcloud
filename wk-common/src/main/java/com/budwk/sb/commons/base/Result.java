@@ -1,6 +1,7 @@
 package com.budwk.sb.commons.base;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.lang.Strings;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author wizzer(wizzer.cn) on 2016/12/21.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Result extends NutMap implements Serializable {
     private static final long serialVersionUID = 1L;
 

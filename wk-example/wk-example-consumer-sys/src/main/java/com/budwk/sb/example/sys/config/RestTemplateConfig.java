@@ -1,4 +1,4 @@
-package com.budwk.sb.example.sys.ribbon;
+package com.budwk.sb.example.sys.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

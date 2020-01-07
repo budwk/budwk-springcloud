@@ -1,19 +1,12 @@
 package com.budwk.sb.commons.base;
 
 import lombok.Data;
-import org.nutz.castor.Castors;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
-import org.nutz.lang.Each;
-import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * @author wizzer(wizzer.cn) on 2016/12/21.
@@ -57,15 +50,15 @@ public class Result extends NutMap implements Serializable {
     }
 
     public static Result success(String content) {
-        return new Result(0, content, null);
+        return new Result(200, content, null);
     }
 
     public static Result success(String content, Object data) {
-        return new Result(0, content, data);
+        return new Result(200, content, data);
     }
 
     public static Result success(Object data) {
-        return new Result(0, "system.success", data);
+        return new Result(200, "system.success", data);
     }
 
     public static Result error(int code, String content) {
@@ -77,7 +70,7 @@ public class Result extends NutMap implements Serializable {
     }
 
     public static Result success() {
-        return new Result(0, "system.success", null);
+        return new Result(200, "system.success", null);
     }
 
     public static Result error() {

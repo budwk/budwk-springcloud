@@ -25,7 +25,7 @@ public class SysDictController {
     @GetMapping("/list")
     public Result getList() {
         Result res = restTemplate.getForObject("http://wk-sb-service-sys/sys/dict_list", Result.class);
-        if (res.getCode() == 0) {
+        if (res.getCode() == 200) {
             List<Sys_dict> list = res.getList("data", Sys_dict.class);
             for (Sys_dict dict : list) {
                 log.debug("k={},v={}", dict.getCode(), dict.getName());

@@ -19,6 +19,7 @@
 nutz:
   dao:
     runtime:
+      enabled: true #是否启用nutz dao 默认false
       create: true #是否自动建表 默认true
       migration: true #是否自动变更 默认true
       add-column: true # 是否添加列 默认true
@@ -60,7 +61,7 @@ sql template 是使用模版引擎在 nutz-dao 的自定义 sql 相关参数注�
 nutz:
   dao:
     sql-template:
-      enable: true #是否启用 默认false
+      enabled: true #是否启用 默认false
       type: beetl #模板引擎类型，默认beetl
 ```
 

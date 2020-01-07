@@ -12,6 +12,7 @@
         <module>wk-starter</module>
         <module>wk-sb-service-sys</module>
         <module>wk-common</module>
+        <module>wk-example</module>
     </modules>
     <name>budwk-springcloud</name>
     <description>spring cloud and nutz</description>

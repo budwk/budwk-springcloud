@@ -1,0 +1,16 @@
+server:
+  port: 9101
+spring:
+  application:
+    name: wk-example-consumer-sys
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+nutz:
+  json:
+    enabled: true #是否启用，默认true
+    mode: compact #json模式，默认compact
+    ignore-null: true # 是否忽略空对象
+    compact: true # 是否启用压缩模式
+    date-format: yyyy-MM-dd Hh:mm:ss # 日期格式化

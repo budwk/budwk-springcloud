@@ -18,6 +18,7 @@ import org.nutz.resource.Scans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -32,6 +33,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ConditionalOnClass({Dao.class})
+@ConditionalOnExpression("${nutz.dao.enabled:false}")
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 public class NutzDaoAutoConfiguration {
@@ -70,7 +72,7 @@ public class NutzDaoAutoConfiguration {
     @PostConstruct
     public void initSqlTemplate() {
         Scans.me().addResourceLocation(springResourceLoaction());
-        if (properties.getSqlTemplate().isEnable()) {
+        if (properties.getSqlTemplate().isEnabled()) {
             switch (properties.getSqlTemplate().getType()) {
                 case BEETL:
                     Sqls.setSqlBorning(BeetlSqlTpl.class);

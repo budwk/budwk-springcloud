@@ -63,10 +63,6 @@ public class NutzDaoAutoConfigurationProperties {
     @Data
     public class Runtime {
         /**
-         * 是否启用nutz dao
-         */
-        private boolean enabled = false;
-        /**
          * 自动建表
          */
         private boolean create = true;

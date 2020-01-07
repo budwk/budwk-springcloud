@@ -1,16 +1,25 @@
 package com.budwk.sb.commons.base;
 
+import lombok.Data;
+import org.nutz.castor.Castors;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
-import org.nutz.lang.Mirror;
+import org.nutz.lang.Each;
+import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
+import org.nutz.lang.util.NutMap;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
- * @author wizzer(wizzer@qq.com) on 2016/12/21.
+ * @author wizzer(wizzer.cn) on 2016/12/21.
  */
-public class Result implements Serializable {
+@Data
+public class Result extends NutMap implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int code;
@@ -73,19 +82,6 @@ public class Result implements Serializable {
 
     public static Result error() {
         return new Result(500100, "system.error", null);
-    }
-
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public Object getData() {
-        return data;
     }
 
     public String toJsonString() {

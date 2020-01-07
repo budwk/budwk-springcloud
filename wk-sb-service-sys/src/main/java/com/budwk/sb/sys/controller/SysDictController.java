@@ -18,10 +18,10 @@ public class SysDictController {
     private SysDictService sysDictService;
 
     @GetMapping("/dict_list")
-    public Object getDictList(){
+    public Result getDictList() {
         try {
             return Result.success().addData(sysDictService.query());
-        }catch (Exception e){
+        } catch (Exception e) {
             return Result.error();
         }
     }

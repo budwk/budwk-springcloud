@@ -32,6 +32,7 @@ logging:
 
 nutz:
   dao:
+    enabled: true
     runtime:
       create: true #是否自动建表 默认true
       migration: false #是否自动变更 默认true

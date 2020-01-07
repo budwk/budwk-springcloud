@@ -104,7 +104,7 @@ Font-awesome | 字体图标  | [https://fontawesome.com](https://fontawesome.com
 *   [@enilu](https://github.com/enilu)
 *   [@loyalove](https://github.com/loyalove)
 *   [@threefish](https://github.com/threefish)
-*   [@kerbores](https://github.com/kerbores)
+*   [@kerbores](https://github.com/kerbores)
 
 # 关于
 
